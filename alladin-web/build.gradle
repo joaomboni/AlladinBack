@@ -1,0 +1,40 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.1.2'
+	id 'io.spring.dependency-management' version '1.1.2'
+	id 'war' //Adiciona o plugin WAR
+}
+
+group = 'com.jbscript'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.jetbrains:annotations:24.0.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api
+	compileOnly 'javax.servlet:javax.servlet-api:3.0.1'
+
+}
+repositories {
+	mavenCentral()
+}
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+bootRun {
+    systemProperty 'spring.profiles.active', 'cloud'
+}
+
+war {
+    archiveFileName = 'Alladin-Web.war'
+}

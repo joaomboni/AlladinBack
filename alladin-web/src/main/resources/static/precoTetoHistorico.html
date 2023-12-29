@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preço Teto Atual</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/styles.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center">Preço Teto Historico</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <form id="lucro-form">
+
+                <div class="form-group col-md-3">
+                    <label for="precoTela">Preço Atual:</label>
+                    <input type="number" step="0.01" class="form-control" id="precoTela" name="precoTela" required>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="lucro_anual01" class="form-label">Lucro do Primeiro Ano:</label>
+                    <input type="number" class="form-control" id="lucro_anual01" name="lucro_anual01" step="0.01" required>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="lucro_anual02" class="form-label">Lucro do Segundo Ano:</label>
+                    <input type="number" class="form-control" id="lucro_anual02" name="lucro_anual02" step="0.01" required>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="lucro_anual03" class="form-label">Lucro do Terceiro Ano:</label>
+                    <input type="number" class="form-control" id="lucro_anual03" name="lucro_anual03" step="0.01" required>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="lucro_anual04" class="form-label">Lucro do Quarto Ano:</label>
+                    <input type="number" class="form-control" id="lucro_anual04" name="lucro_anual04" step="0.01" required>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="lucro_anual05" class="form-label">Lucro do Quinto Ano:</label>
+                    <input type="number" class="form-control" id="lucro_anual05" name="lucro_anual05" step="0.01" required>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="lucro_anual06" class="form-label">Lucro do Sexto Ano:</label>
+                    <input type="number" class="form-control" id="lucro_anual06" name="lucro_anual06" step="0.01" required>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="lucro_anual07" class="form-label">Lucro do Setimo Ano:</label>
+                    <input type="number" class="form-control" id="lucro_anual07" name="lucro_anual07" step="0.01" required>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="payout_medio" class="form-label">PayOut Médio:</label>
+                    <input type="number" class="form-control" id="payout_medio" name="payout_medio" step="0.01" required>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="nu_acoes" class="form-label">Número de Ações Disponivies:</label>
+                    <input type="number" class="form-control" id="nu_acoes" name="nu_acoes" step="0.01" required>
+                </div>
+                <div class="text-left mt-3">
+                    <button type="submit" class="btn btn-primary">Start</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-6">
+    <div class="col-md-12">
+        <div class="mt-4">
+            <div id="precoAtual"></div>
+            <div id="resultado"></div>
+            <div id="preco_teto_historico"></div>
+            <div id="margemSeguranca"></div>
+            <div id="recomendacaoCompra"></div>
+        </div>
+    </div>
+</div>
+
+
+<a href="index.html" class="back-to-main">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+         fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+    </svg>
+</a>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function() {
+      $("#lucro-form").submit(function(event) {
+        event.preventDefault();
+        var lucro_anual01 = parseFloat($("#lucro_anual01").val());
+        var lucro_anual02 = parseFloat($("#lucro_anual02").val());
+        var lucro_anual03 = parseFloat($("#lucro_anual03").val());
+        var lucro_anual04 = parseFloat($("#lucro_anual04").val());
+        var lucro_anual05 = parseFloat($("#lucro_anual05").val());
+        var lucro_anual06 = parseFloat($("#lucro_anual06").val());
+        var lucro_anual07 = parseFloat($("#lucro_anual07").val());
+
+        var precoTela = parseFloat($("#precoTela").val());
+        var payout_medio = parseFloat($("#payout_medio").val());
+        var nu_acoes = parseFloat($("#nu_acoes").val());
+
+         // Realize a chamada AJAX para o backend em Java
+          $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/calcular-teto-historico", //endpoint
+            data: {lucro_anual01: lucro_anual01, lucro_anual02: lucro_anual02,
+            lucro_anual03: lucro_anual03, lucro_anual04: lucro_anual04,
+            lucro_anual05: lucro_anual05, lucro_anual06: lucro_anual06,
+             lucro_anual07: lucro_anual07, payout_medio: payout_medio,
+             nu_acoes: nu_acoes, precoTela: precoTela},
+            success: function(resultado){
+            var precoAtual = resultado.precoTela;
+            var preco_teto_historico = resultado.preco_teto_historico;
+            var margemSeguranca = resultado.margemSeguranca;
+            var recomendacaoCompra = resultado.recomendarCompra;
+
+            $("#precoAtual").html("Preço Atual: " + precoAtual);
+            $("#preco_teto_historico").html("Preço Teto Historico: " + preco_teto_historico.toFixed(2));
+            $("#margemSeguranca").html("Margem de Segurança: " + margemSeguranca.toFixed(2) + "%");
+            $("#recomendacaoCompra").html("Recomendação: " + recomendacaoCompra);
+            },
+            complete: function(xhr, status) {
+            // Mesmo que a chamada falhe, exiba uma mensagem
+            if (status !== "success") {
+              $("#resultado").html("Houve um erro ao processar a solicitação.");
+            }
+          }
+        });
+      });
+    });
+</script>
+</body>
+</html>
