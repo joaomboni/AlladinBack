@@ -44,7 +44,7 @@ public class PrecoTetoHistoricoController
         
         /* Imprime Teste de Saída */
         //System.out.println(precoTetoHistorico.getPrecoTelaAtual());
-        System.out.println(precoTetoHistorico.getLucro_anual01());
+        //System.out.println(precoTetoHistorico.getLucro_anual01());
         //System.out.println(precoTetoHistorico.getNu_acoes());
         
         Map<String, Object> resultados = new HashMap<>();
