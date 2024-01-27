@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class CalculadoraPrecoTetoHistorico
 {
-    private static final int ARRAY_LUCRO = 7;
-    private static final double LUCRO_MINIMO = 6.0 / 100;
+    //private static final int ARRAY_LUCRO = 7;
+    private static final double LUCRO_MINIMO = 0.06;
 
     public double avarage(@NotNull PrecoTetoHistorico precoTetoHistorico)
     {
@@ -19,10 +19,11 @@ public class CalculadoraPrecoTetoHistorico
         double lucro_anual05 = precoTetoHistorico.getLucro_anual05();
         double lucro_anual06 = precoTetoHistorico.getLucro_anual06();
         double lucro_anual07 = precoTetoHistorico.getLucro_anual07();
-
-        double media = ((lucro_anual01 + lucro_anual02 + lucro_anual03 + lucro_anual04
-                + lucro_anual05 + lucro_anual06 + lucro_anual07) / ARRAY_LUCRO);
-        return media;
+        double acoes_circulantes = precoTetoHistorico.getNu_acoes();
+        
+        double media_lpa = ((lucro_anual01 + lucro_anual02 + lucro_anual03 + lucro_anual04
+                + lucro_anual05 + lucro_anual06 + lucro_anual07) / acoes_circulantes);
+        return media_lpa;
     }
 
     public double payout(@NotNull PrecoTetoHistorico precoTetoHistorico)
@@ -31,29 +32,34 @@ public class CalculadoraPrecoTetoHistorico
         return (payout_medio / 100);
     }
 
-    public double lpa_medio(PrecoTetoHistorico precoTetoHistorico)
+    /*public double lpa_medio(PrecoTetoHistorico precoTetoHistorico)
     {
         return avarage(precoTetoHistorico) / precoTetoHistorico.getNu_acoes();
-    }
+    }*/
 
     public  double dpa_medio(PrecoTetoHistorico precoTetoHistorico)
     {
-        return lpa_medio(precoTetoHistorico) * payout(precoTetoHistorico);
+        return avarage(precoTetoHistorico) * payout(precoTetoHistorico);
     }
 
     public double precoTetoHistoricoResultado (PrecoTetoHistorico precoTetoHistorico){
         return dpa_medio(precoTetoHistorico) / LUCRO_MINIMO;
     }
 
-    public double precoAtual(@NotNull PrecoTetoHistorico precoTetoHistorico) { return precoTetoHistorico.getPrecoTela();}
-
+    public double precoAtual(@NotNull PrecoTetoHistorico precoTetoHistorico) { 
+        return  precoTetoHistorico.getPrecoTelaAtual();
+    }
+    
+    private static final String n_compra = "Não recomendação de compra";
+    private static final String cautela = "Recomendação de compra com cautela";
+    private static final String compra_excelente = "Recomendação de compra excelente";
     public String recomendarCompra(double margemSeguranca) {
         if (margemSeguranca < 20) {
-            return "Não recomendação de compra";
+            return n_compra;
         } else if (margemSeguranca >= 20 && margemSeguranca <= 30) {
-            return "Recomendação de compra com cautela";
+            return cautela;
         } else {
-            return "Recomendação de compra excelente";
+            return compra_excelente;
         }
     }
     public double margemSeguranca(PrecoTetoHistorico precoTetoHistorico) {

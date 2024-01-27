@@ -2,7 +2,6 @@ package com.jbscript.alladin.calculadora;
 
 public class PrecoTetoHistorico
 {
-    private double precoTela;
     private double lucro_anual01;
     private double lucro_anual02;
     private double lucro_anual03;
@@ -12,9 +11,12 @@ public class PrecoTetoHistorico
     private double lucro_anual07;
     private double payout_medio;
     private double nu_acoes;
+    private double precoTelaAtual;
 
 
-    public PrecoTetoHistorico(double lucro_anual01, double lucro_anual02, double lucro_anual03, double lucro_anual04, double lucro_anual05, double lucro_anual06, double lucro_anual07, double payout_medio, double nu_acoes, double precoTela) {
+    public PrecoTetoHistorico(double lucro_anual01, double lucro_anual02, double lucro_anual03, 
+    double lucro_anual04, double lucro_anual05, double lucro_anual06, double lucro_anual07,
+    double payout_medio, double nu_acoes, double precoTelaAtual) {
         this.lucro_anual01 = lucro_anual01;
         this.lucro_anual02 = lucro_anual02;
         this.lucro_anual03 = lucro_anual03;
@@ -24,15 +26,7 @@ public class PrecoTetoHistorico
         this.lucro_anual07 = lucro_anual07;
         this.payout_medio = payout_medio;
         this.nu_acoes = nu_acoes;
-        this.precoTela = precoTela;
-    }
-
-    public double getPrecoTela() {
-        return precoTela;
-    }
-
-    public void setPrecoTela(double precoTela) {
-        this.precoTela = precoTela;
+        this.precoTelaAtual = precoTelaAtual;
     }
 
     public double getLucro_anual01() {
@@ -105,5 +99,13 @@ public class PrecoTetoHistorico
 
     public void setNu_acoes(double nu_acoes) {
         this.nu_acoes = nu_acoes;
+    }
+
+    public double getPrecoTelaAtual() {
+        return precoTelaAtual;
+    }
+
+    public void setPrecoTelaAtual(double precoTelaAtual) {
+        this.precoTelaAtual = precoTelaAtual;
     }
 }

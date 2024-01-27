@@ -34,16 +34,21 @@ public class PrecoTetoHistoricoController
                                                     @RequestParam double lucro_anual07,
                                                     @RequestParam double payout_medio,
                                                     @RequestParam double nu_acoes,
-                                                    @RequestParam double precoTela) {
-        PrecoTetoHistorico precoTetoHistorico = new PrecoTetoHistorico(precoTela, lucro_anual01, lucro_anual02, lucro_anual03,
-                lucro_anual04, lucro_anual05, lucro_anual06,
-                lucro_anual07, payout_medio, nu_acoes);
+                                                    @RequestParam double precoTelaAtual) {
+        PrecoTetoHistorico precoTetoHistorico = new PrecoTetoHistorico(lucro_anual01, 
+                lucro_anual02, lucro_anual03,lucro_anual04, lucro_anual05, lucro_anual06,
+                lucro_anual07, payout_medio, nu_acoes,precoTelaAtual);
 
         double margemSeguranca = calculadoraPrecoTetoHistorico.margemSeguranca(precoTetoHistorico);
         String recomendarCompra = calculadoraPrecoTetoHistorico.recomendarCompra(margemSeguranca);
-
+        
+        /* Imprime Teste de Saída */
+        //System.out.println(precoTetoHistorico.getPrecoTelaAtual());
+        System.out.println(precoTetoHistorico.getLucro_anual01());
+        //System.out.println(precoTetoHistorico.getNu_acoes());
+        
         Map<String, Object> resultados = new HashMap<>();
-        resultados.put("precoTela", precoTetoHistorico.getPrecoTela());
+        resultados.put("precoTelaAtual", precoTetoHistorico.getPrecoTelaAtual());
         resultados.put("preco_teto_historico", calculadoraPrecoTetoHistorico.precoTetoHistoricoResultado(precoTetoHistorico));
         resultados.put("margemSeguranca", margemSeguranca);
         resultados.put("recomendarCompra", recomendarCompra);
@@ -55,7 +60,7 @@ public class PrecoTetoHistoricoController
         @Override
         public void addCorsMappings(CorsRegistry registry) {
             registry.addMapping("/calcular-teto-historico")
-                    .allowedOrigins("http://146.235.47.198") // Permita solicitações deste domínio
+                    .allowedOrigins("http://localhost:8080") // Permita solicitações deste domínio
                     .allowedMethods("POST"); // Defina os métodos HTTP permitidos
         }
     }
