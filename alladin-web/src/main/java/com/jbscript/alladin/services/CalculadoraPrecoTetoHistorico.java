@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CalculadoraPrecoTetoHistorico
 {
-    //private static final int ARRAY_LUCRO = 7;
+    private static final int ARRAY_LUCRO = 6;
     private static final double LUCRO_MINIMO = 0.06;
 
     public double avarage(@NotNull PrecoTetoHistorico precoTetoHistorico)
@@ -18,11 +18,11 @@ public class CalculadoraPrecoTetoHistorico
         double lucro_anual04 = precoTetoHistorico.getLucro_anual04();
         double lucro_anual05 = precoTetoHistorico.getLucro_anual05();
         double lucro_anual06 = precoTetoHistorico.getLucro_anual06();
-        double lucro_anual07 = precoTetoHistorico.getLucro_anual07();
-        double acoes_circulantes = precoTetoHistorico.getNu_acoes();
+        //double lucro_anual07 = precoTetoHistorico.getLucro_anual07();
+        //double acoes_circulantes = precoTetoHistorico.getNu_acoes();
         
         double media_lpa = ((lucro_anual01 + lucro_anual02 + lucro_anual03 + lucro_anual04
-                + lucro_anual05 + lucro_anual06 + lucro_anual07) / acoes_circulantes);
+                + lucro_anual05 + lucro_anual06 /*+ lucro_anual07*/) / ARRAY_LUCRO);
         return media_lpa;
     }
 
@@ -32,10 +32,10 @@ public class CalculadoraPrecoTetoHistorico
         return (payout_medio / 100);
     }
 
-    /*public double lpa_medio(PrecoTetoHistorico precoTetoHistorico)
+    public double lpa_medio(PrecoTetoHistorico precoTetoHistorico)
     {
         return avarage(precoTetoHistorico) / precoTetoHistorico.getNu_acoes();
-    }*/
+    }
 
     public  double dpa_medio(PrecoTetoHistorico precoTetoHistorico)
     {
@@ -65,7 +65,7 @@ public class CalculadoraPrecoTetoHistorico
     public double margemSeguranca(PrecoTetoHistorico precoTetoHistorico) {
         double precoTetoHistoricoResultado = precoTetoHistoricoResultado(precoTetoHistorico);
         double precoAtual = precoAtual(precoTetoHistorico);
-
-        return precoTetoHistoricoResultado - precoAtual;
+        return (((precoTetoHistoricoResultado - precoAtual) / precoAtual) * 100);
+        //return  mS * 100;
     }
 }

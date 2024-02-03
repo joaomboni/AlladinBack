@@ -8,14 +8,14 @@ public class PrecoTetoHistorico
     private double lucro_anual04;
     private double lucro_anual05;
     private double lucro_anual06;
-    private double lucro_anual07;
+    //private double lucro_anual07;
     private double payout_medio;
     private double nu_acoes;
     private double precoTelaAtual;
 
 
     public PrecoTetoHistorico(double lucro_anual01, double lucro_anual02, double lucro_anual03, 
-    double lucro_anual04, double lucro_anual05, double lucro_anual06, double lucro_anual07,
+    double lucro_anual04, double lucro_anual05, double lucro_anual06, /*double lucro_anual07,*/
     double payout_medio, double nu_acoes, double precoTelaAtual) {
         this.lucro_anual01 = lucro_anual01;
         this.lucro_anual02 = lucro_anual02;
@@ -23,7 +23,7 @@ public class PrecoTetoHistorico
         this.lucro_anual04 = lucro_anual04;
         this.lucro_anual05 = lucro_anual05;
         this.lucro_anual06 = lucro_anual06;
-        this.lucro_anual07 = lucro_anual07;
+        //this.lucro_anual07 = lucro_anual07;
         this.payout_medio = payout_medio;
         this.nu_acoes = nu_acoes;
         this.precoTelaAtual = precoTelaAtual;
@@ -77,13 +77,13 @@ public class PrecoTetoHistorico
         this.lucro_anual06 = lucro_anual06;
     }
 
-    public double getLucro_anual07() {
+    /*public double getLucro_anual07() {
         return lucro_anual07;
     }
 
     public void setLucro_anual07(double lucro_anual07) {
         this.lucro_anual07 = lucro_anual07;
-    }
+    }*/
 
     public double getPayout_medio() {
         return payout_medio;

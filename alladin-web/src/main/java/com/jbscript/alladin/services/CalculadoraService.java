@@ -32,7 +32,7 @@ public class CalculadoraService
     public double margemSeguranca(ValorIntrinseco valorIntrinseco) {
         double valorIntrinsecoCalculado = calcularValorIntrinseco(valorIntrinseco);
         double precoAtual = precoAtual(valorIntrinseco);
-
-        return valorIntrinsecoCalculado - precoAtual;
+        return (((valorIntrinsecoCalculado - precoAtual) / precoAtual) * 100);
+        //return  mS * 100;
     }
 }

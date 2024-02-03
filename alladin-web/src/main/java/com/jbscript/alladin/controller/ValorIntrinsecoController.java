@@ -56,7 +56,7 @@ public class ValorIntrinsecoController {
         public void addCorsMappings(@NotNull CorsRegistry registry) {
             registry.addMapping("/calcular-valor-intrinseco")
                     //.allowedOrigins("http://146.235.47.198")// Permita solicitações deste domínio
-                    .allowedOrigins("http://localhost:8080")
+                    .allowedOrigins("http://localhost")
                     .allowedMethods("POST"); // Defina os métodos HTTP permitidos
         }
     }

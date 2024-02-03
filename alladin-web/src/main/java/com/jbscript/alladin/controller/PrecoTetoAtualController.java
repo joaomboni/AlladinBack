@@ -14,7 +14,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin(origins = {"http://localhost"})
 @RestController
 public class PrecoTetoAtualController
 {
@@ -39,7 +41,7 @@ public class PrecoTetoAtualController
         @Override
         public void addCorsMappings(CorsRegistry registry) {
             registry.addMapping("/preco-teto-atual")
-                    .allowedOrigins("http://146.235.47.198") // Permita solicitações deste domínio
+                    .allowedOrigins("http://localhost:8080") // Permita solicitações deste domínio
                     .allowedMethods("POST"); // Defina os métodos HTTP permitidos
         }
     }
